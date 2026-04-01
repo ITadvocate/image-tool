@@ -4,6 +4,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_URL="${REPO_URL:-https://github.com/ITadvocate/image-tool.git}"
+APP_GIT_REF="${APP_GIT_REF:-main}"
 NETWORK_NAME="${COMPOSE_NETWORK_NAME:-image-tool-network}"
 REQUIRED_FILES=("docker-compose.yml" "package.json" "server.js" "Dockerfile")
 
@@ -53,8 +54,8 @@ sync_repo_into_place() {
   temp_dir="$(mktemp -d)"
   repo_dir="${temp_dir}/repo"
 
-  log "Local app files are missing. Fetching source from ${REPO_URL}"
-  git clone --depth 1 "${REPO_URL}" "${repo_dir}" >/dev/null 2>&1 || fail "Unable to clone ${REPO_URL}"
+  log "Local app files are missing. Fetching source from ${REPO_URL} (${APP_GIT_REF})"
+  git clone --depth 1 --branch "${APP_GIT_REF}" "${REPO_URL}" "${repo_dir}" >/dev/null 2>&1 || fail "Unable to clone ${REPO_URL} (${APP_GIT_REF})"
 
   if command_exists rsync; then
     rsync -a \

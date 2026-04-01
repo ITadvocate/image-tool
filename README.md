@@ -96,6 +96,23 @@ You can override that:
 REPO_URL=https://github.com/ITadvocate/image-tool.git ./deploy.sh
 ```
 
+### Publish scripts
+
+Two additional root scripts are included for end-to-end deployment automation:
+
+- `./publish-vm.sh`
+  - installs Docker and required OS packages on a Linux VM
+  - fetches the repo if the app files are missing
+  - creates the Docker network
+  - launches the app with Docker Compose
+- `./publish-k8s.sh`
+  - installs `kubectl`
+  - can optionally build and push the image to GHCR
+  - creates namespace, configmap, PVCs, deployment, service, and optional ingress
+  - waits for the rollout to complete
+
+Both default to `APP_GIT_REF=develop` right now so they can be tested before merging into `main`.
+
 ### Local
 
 ```bash
