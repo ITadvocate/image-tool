@@ -318,3 +318,10 @@ The full architecture and rollout plan is documented in:
 - The generic converter UI is available from the browser at `/`
 - The generic converter endpoints are still available even with the e-commerce layer enabled
 - Docker Compose config is included, but Docker Desktop must be running on your machine for `docker-compose up --build` to work
+
+## License
+
+This project is licensed under the GNU Affero General Public License v3.0.
+
+- Full text: [LICENSE](LICENSE)
+- SPDX identifier: `AGPL-3.0-only`

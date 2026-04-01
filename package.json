@@ -2,6 +2,7 @@
   "name": "image-converter-optimizer",
   "version": "1.0.0",
   "description": "Production-ready starter for image upload, conversion, optimization, and batch downloads.",
+  "license": "AGPL-3.0-only",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
