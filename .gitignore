@@ -1,0 +1,12 @@
+node_modules
+.DS_Store
+dist
+coverage
+*.log
+*.tsbuildinfo
+uploads/*
+!uploads/.gitkeep
+processed/*
+!processed/.gitkeep
+temp/*
+!temp/.gitkeep

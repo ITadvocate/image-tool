@@ -1,0 +1,30 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      PORT: 3000
+      MAX_FILE_SIZE_BYTES: ${MAX_FILE_SIZE_BYTES:-5242880}
+      MAX_BATCH_FILES: ${MAX_BATCH_FILES:-20}
+      TEMP_FILE_TTL_MS: ${TEMP_FILE_TTL_MS:-3600000}
+      CLEANUP_INTERVAL_MS: ${CLEANUP_INTERVAL_MS:-900000}
+      BATCH_RECORD_TTL_MS: ${BATCH_RECORD_TTL_MS:-86400000}
+      DYNAMIC_CACHE_MAX_AGE_SECONDS: ${DYNAMIC_CACHE_MAX_AGE_SECONDS:-604800}
+      WRITE_RATE_LIMIT_WINDOW_MS: ${WRITE_RATE_LIMIT_WINDOW_MS:-60000}
+      WRITE_RATE_LIMIT_MAX: ${WRITE_RATE_LIMIT_MAX:-120}
+      WATERMARK_LOGO_PATH: ${WATERMARK_LOGO_PATH:-}
+      WATERMARK_TEXT: ${WATERMARK_TEXT:-}
+    volumes:
+      - ./uploads:/app/uploads
+      - ./processed:/app/processed
+    networks:
+      - image_tool_network
+    restart: unless-stopped
+
+networks:
+  image_tool_network:
+    name: ${COMPOSE_NETWORK_NAME:-image-tool-network}
+    external: true
